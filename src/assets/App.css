@@ -7,53 +7,65 @@
 }
 
 :root {
-  --clr-blue-800: #0b2434;
-  --clr-white-200: #f5f5f5;
+  --green-grad: linear-gradient(45deg, #11998e, #38ef7d);
+  --clr-white-200: hsl(0, 0%, 94%);
   --clr-white-100: #ffffff;
   --clr-green-100: #59e391;
-  --btn-clr: #5035ff;
-  --btn-clr-hover: hsl(248, 100%, 57%);
-  --btn-clr-active: hsla(248, 100%, 62%, 0.8);
+  --btn-clr: var(--green-grad);
   --btn-transition: all 0.3s linear;
   --btn-transform-hover: translateY(2px);
   --btn-transform-active: translateY(-4px);
-  --dice-hover: #4e33ff1a;
-  --dice-transform-hover: scale(1.05);
-  --dice-transform-active: scale(1.1);
-  --dice-transition: all 0.2s linear;
+  --dice-transform-hover: translateY(2px);
+  --dice-transform-active: scale(1.05);
+  --dice-transition: transform 0.2s linear;
 }
+
 
 body {
   font-family: "Inter", sans-serif;
   min-height: 100vh;
-  background: var(--clr-blue-800);
+  background-image: var(--green-grad);
   display: grid;
   place-items: center;
+  color: #00413c;
 }
 
 button {
-  background: var(--btn-clr);
+  background-image: var(--btn-clr);
+  background-size: 160%;
   border: none;
   border-radius: 1rem 1.5rem;
   padding: 1rem 3.5rem;
-  color: var(--clr-blue-800);
   font-size: 1.5rem;
   cursor: pointer;
   color: white;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   transition: var(--btn-transition);
+  user-select: none;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-button:hover {
-  background-color: var(--btn-clr-hover);
-  transform: var(--btn-transform-hover);
-  transition: var(--btn-transition);
+@media (hover: hover) and (pointer: fine) {
+  button:hover {
+    background-position: center 80%;
+    transform: var(--btn-transform-hover);
+    transition: var(--btn-transition);
+    opacity: 0.9;
+  }
 }
 
 button:active {
+  background-position: center 80%;
   transform: var(--btn-transform-active);
   transition: var(--btn-transition);
-  background-color: var(--btn-clr-active);
+}
+
+.grad-text {
+  background-image: var(--green-grad);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .App {
@@ -71,19 +83,19 @@ button:active {
   align-items: center;
   justify-content: center;
   gap: 2.5em;
-  border-radius: 50px 100px;
+  border-radius: 50px 30%;
   text-align: center;
-  color: var(--clr-blue-800);
+  box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.1);
 }
 
 .game-header h1 {
-  font-size: clamp(2rem, 1rem + 2vw, 2.5rem);
+  font-size: clamp(2rem, 1rem + 3vw, 2.5rem);
   margin-bottom: 0.25em;
 }
 
 .game-header p {
   max-width: 27ch;
-  font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
+  font-size: clamp(1.2rem, 1rem + 1.5vw, 1.4rem);
 }
 
 .dice-container {
@@ -106,13 +118,17 @@ button:active {
   font-weight: 600;
   border-radius: 5px;
   transition: var(--dice-transition);
+  user-select: none;
 }
 
-.dice:hover {
-  cursor: pointer;
-  background-color: var(--dice-hover);
-  transform: var(--dice-transform-hover);
-  transition: var(--dice-transition);
+@media (hover: hover) and (pointer: fine) {
+  .dice:hover {
+    cursor: pointer;
+    background-color: var(--dice-hover);
+    transform: var(--dice-transform-hover);
+    transition: var(--dice-transition);
+    -webkit-transition: var(--dice-transition);
+  }
 }
 
 .dice:active {
@@ -123,7 +139,10 @@ button:active {
 }
 
 .dice.frozen {
-  background-color: var(--clr-green-100);
+  background-color: unset;
+  background-image: var(--green-grad);
+  background-size: 120% 120%;
+  color: white;
 }
 
 .dice.roll {
